@@ -1,31 +1,42 @@
 <script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router';
 import { defineComponent, ref, watchEffect } from 'vue';
-import { NConfigProvider, zhCN, dateZhCN, darkTheme } from 'naive-ui';
+import { NConfigProvider, zhCN, dateZhCN, darkTheme, NLoadingBarProvider,NGlobalStyle } from 'naive-ui';
 import { useThemeStore } from '@/stores/pinia';
+import { lightThemeOverrides, darkThemeOverrides } from '@/styles/index';
+import Index from '@/layout/index.vue';
+import Commons from '@/components/commons.vue';
+console.log(lightThemeOverrides);
 defineComponent({
   components: {
-    NConfigProvider
+    NConfigProvider,
+    NLoadingBarProvider,
+    Index,
+    Commons,
+    NGlobalStyle
   },
 });
+
 const themeStore = useThemeStore();
 const theme: any = ref(darkTheme);
 watchEffect(() => {
-  if(themeStore.THEME_DARK){
-    document.getElementsByTagName('html')[0].classList.add('dark');
+  if (themeStore.THEME_DARK) {
+    // document.getElementsByTagName('html')[0].classList.add('dark');
     theme.value = darkTheme;
-  }else{
+  } else {
     theme.value = null;
-    document.getElementsByTagName('html')[0].classList.remove('dark');
+    // document.getElementsByTagName('html')[0].classList.remove('dark');
   }
 });
 </script>
 
 <template>
-  <n-config-provider wh-full :locale="zhCN" :date-locale="dateZhCN" :theme="theme">
-    <router-view v-slot="{ Component }">
-      <component :is="Component" />
-    </router-view>
+  <Commons />
+  <n-config-provider wh-full :locale="zhCN" :date-locale="dateZhCN" :theme="theme"
+    :theme-overrides="theme === null ? lightThemeOverrides : darkThemeOverrides">
+    <n-loading-bar-provider>
+      <Index />
+    </n-loading-bar-provider>
+    <n-global-style />
   </n-config-provider>
 </template>
 
@@ -34,5 +45,10 @@ html,
 body {
   padding: 0;
   margin: 0;
+}
+
+#app {
+  width: 100%;
+  height: 100%;
 }
 </style>

@@ -1,23 +1,39 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import type { App } from "vue";
+import { createRouter, createWebHistory } from 'vue-router';
+import type { Router } from 'vue-router';
 
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
+  history: createWebHistory(import.meta.env.VITE_BASE_PATH),
   routes: [
     {
       path: '/',
-      name: 'home',
-      component: HomeView
+      redirect: '/xiao',
+    },
+    {
+      path: '/xiao',
+      name: 'xiao',
+      component: () => import('@/views/HomeView.vue')
     },
     {
       path: '/about',
       name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import('../views/AboutView.vue')
+      component: () => import('@/views/AboutView.vue')
     }
   ]
 })
 
+function createRouteGuard(router: Router) {
+  router.beforeEach(async () => {
+    // 显示加载条
+    window.$loadingBar.start();
+  });
+  /* eslint-disable */
+  router.afterEach((to: any) => {
+    window.$loadingBar.finish();
+  })
+}
+export async function setupRouter(app: App) {
+  app.use(router)
+  createRouteGuard(router)
+}
 export default router
