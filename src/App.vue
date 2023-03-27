@@ -1,11 +1,10 @@
 <script setup lang="ts">
 import { defineComponent, ref, watchEffect } from 'vue';
-import { NConfigProvider, zhCN, dateZhCN, darkTheme, NLoadingBarProvider,NGlobalStyle } from 'naive-ui';
+import { NConfigProvider, zhCN, dateZhCN, darkTheme, NLoadingBarProvider, NGlobalStyle } from 'naive-ui';
 import { useThemeStore } from '@/stores/pinia';
-import { lightThemeOverrides, darkThemeOverrides } from '@/styles/index';
+import { lightThemeOverrides, darkThemeOverrides, loadingBarLightTheme, loadingBarDarkTheme } from '@/styles/index';
 import Index from '@/layout/index.vue';
 import Commons from '@/components/commons.vue';
-console.log(lightThemeOverrides);
 defineComponent({
   components: {
     NConfigProvider,
@@ -31,13 +30,13 @@ watchEffect(() => {
 
 <template>
   <Commons />
-  <n-config-provider wh-full :locale="zhCN" :date-locale="dateZhCN" :theme="theme"
-    :theme-overrides="theme === null ? lightThemeOverrides : darkThemeOverrides">
+  <!-- <n-config-provider wh-full :locale="zhCN" :date-locale="dateZhCN" :theme="theme"
+    :theme-overrides="theme === null ? lightThemeOverrides : darkThemeOverrides"> -->
     <n-loading-bar-provider>
       <Index />
     </n-loading-bar-provider>
     <n-global-style />
-  </n-config-provider>
+  <!-- </n-config-provider> -->
 </template>
 
 <style>

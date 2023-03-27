@@ -12,7 +12,9 @@
     "type-check": "vue-tsc --noEmit -p tsconfig.vitest.json --composite false"
   },
   "dependencies": {
+    "@kangc/v-md-editor": "^2.3.15",
     "pinia": "^2.0.32",
+    "vite-plugin-prismjs": "^0.0.8",
     "vue": "^3.2.47",
     "vue-router": "^4.1.6"
   },
