@@ -2,7 +2,7 @@
 
 _斜体代码块_
 
-``` js
+```js
 import type { GlobalThemeOverrides } from 'naive-ui';
 export const lightThemeOverrides:GlobalThemeOverrides = {
   common: {

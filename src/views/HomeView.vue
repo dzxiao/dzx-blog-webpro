@@ -16,5 +16,5 @@ const text = ref(markdownTxt);
   <n-button type="primary" @click="switchTheme('light')">
     浅色
   </n-button>
-  <v-md-preview :text="text" mode="preview"></v-md-preview>
+  <v-md-editor :model-value="text" mode="preview"></v-md-editor>
 </template>

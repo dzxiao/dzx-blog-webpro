@@ -30,13 +30,13 @@ watchEffect(() => {
 
 <template>
   <Commons />
-  <!-- <n-config-provider wh-full :locale="zhCN" :date-locale="dateZhCN" :theme="theme"
-    :theme-overrides="theme === null ? lightThemeOverrides : darkThemeOverrides"> -->
+  <n-config-provider wh-full :locale="zhCN" :date-locale="dateZhCN" :theme="theme"
+    :theme-overrides="theme === null ? lightThemeOverrides : darkThemeOverrides">
     <n-loading-bar-provider>
       <Index />
     </n-loading-bar-provider>
     <n-global-style />
-  <!-- </n-config-provider> -->
+  </n-config-provider>
 </template>
 
 <style>
