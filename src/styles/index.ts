@@ -20,17 +20,6 @@ export const loadingBarLightTheme = {
   "loading": "#EF15AAFF",
 }
 export const darkThemeOverrides = {
-  common: {
-    bodyColor: '#131124FF'
-  },
-  "Layout": {
-    "headerColor": "#131124FF",
-    "siderColor": "#131124FF"
-  },
-  "LoadingBar": {
-    "colorLoading": "#eef7f2FF",
-    "height": "3px"
-  }
 }
 export const loadingBarDarkTheme = {
   "colorLoading": "#EF15AAFF",
