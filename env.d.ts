@@ -17,3 +17,8 @@ declare module '@kangc/v-md-editor/lib/plugins/emoji/index';
 declare module '@kangc/v-md-editor/lib/plugins/tip/index';
 declare module '@kangc/v-md-editor/lib/plugins/todo-list/index';
 declare module '@kangc/v-md-editor/lib/plugins/highlight-lines/index';
+declare module '*.vue' {
+  import type { DefineComponent } from 'vue'
+  const component: ComponentOptions | ComponentOptions['setup']
+  export default component
+}

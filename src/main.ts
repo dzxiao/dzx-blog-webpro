@@ -5,7 +5,7 @@ import {
 } from './markdown';
 import App from './App.vue'
 import { setupRouter } from './router'
-import './assets/main.css'
+import './assets/css/main.css'
 
 const app = createApp(App);
 app.use(VMdEditor);

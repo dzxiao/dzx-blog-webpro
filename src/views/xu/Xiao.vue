@@ -11,10 +11,4 @@ const md = ref(markdownTxt);
 </script>
 
 <template>
-  <div>首页</div>
-  <!-- <n-button @click="switchTheme('dark')">深色</n-button>
-  <n-button type="primary" @click="switchTheme('light')">
-    浅色
-  </n-button> -->
-  <!-- <v-md-editor :model-value="md" mode="preview"></v-md-editor> -->
 </template>

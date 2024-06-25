@@ -17,6 +17,8 @@
     "highlight.js": "^11.7.0",
     "pinia": "^2.0.32",
     "prismjs": "^1.29.0",
+    "sass": "^1.77.6",
+    "sass-loader": "^14.2.1",
     "vite-plugin-prismjs": "^0.0.8",
     "vue": "^3.2.47",
     "vue-router": "^4.1.6"

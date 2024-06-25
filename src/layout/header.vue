@@ -64,10 +64,10 @@ const switchTheme = (type: string) => {
 
 <template>
   <n-layout-header>
-    <div class="left-logo"> <n-icon size="30" :component="GameController" /><span>logo</span></div>
+    <!-- <div class="left-logo"> <n-icon size="30" :component="GameController" /><span>logo</span></div> -->
     <div class="center-title">
-      <n-spin size="small" />
-      打怪获取标题中·····
+      <!-- <n-spin size="small" /> -->
+      Zixiao-D
     </div>
     <div class="right-menu">
       <n-menu v-model:value="activeKey" mode="horizontal" :on-update:value="isChangeMenu" :options="menuOptions" />

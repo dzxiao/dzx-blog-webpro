@@ -20,7 +20,6 @@ export default defineConfig(({ mode }) => {
               'useDialog',
               'useMessage',
               'useNotification',
-              'useLoadingBar'
             ]
           }
         ]

@@ -8,7 +8,14 @@ import { createDiscreteApi } from 'naive-ui'
 import { defineComponent } from "vue";
 
 const { message, notification, dialog, loadingBar } = createDiscreteApi(
-  ['message', 'dialog', 'notification', 'loadingBar']
+  ['message', 'dialog', 'notification', 'loadingBar'],
+  {
+    loadingBarProviderProps: {
+      themeOverrides: {
+        colorLoading: '#8a2be2'
+      }
+    }
+  }
 )
 
 window.$message = message;
