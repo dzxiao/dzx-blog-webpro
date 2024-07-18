@@ -12,8 +12,8 @@ defineComponent({
 <template>
   <n-layout style="height: 100vh">
     <Header />
-    <n-layout position="absolute" style="top: 60px;">
-      <n-layout-content content-style="padding: 24px;" style="height: 100%;">
+    <n-layout position="absolute" style="top: 60px;" >
+      <n-layout-content content-style="padding: 0 24px 0 0;" style="height: 100%;">
         <router-view v-slot="{ Component }">
           <component :is="Component" />
         </router-view>

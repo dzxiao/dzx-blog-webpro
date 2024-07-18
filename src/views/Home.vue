@@ -1,11 +1,44 @@
 <script setup lang="ts">
 import { CashOutline as CashIcon } from "@vicons/ionicons5";
-import { defineComponent } from "vue";
+import { defineComponent, ref } from "vue";
+import { useRouter } from "vue-router";
+import Carousel from "@/components/home/Carousel.vue";
+import type { IMGLISTTYPE } from "./homeType";
+const router = useRouter();
 defineComponent({
   components: {
     CashIcon,
+    Carousel,
   },
 });
+
+const imgList: IMGLISTTYPE = ref([
+  {
+    title: '测试1',
+    link: 'https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel1.jpeg',
+  },
+  {
+    title: '测试2',
+    link: 'https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel2.jpeg',
+  },
+  {
+    title: '测试3',
+    link: 'https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel3.jpeg',
+  },
+  {
+    title: '测试4',
+    link: 'https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel4.jpeg',
+  }
+]);
+
+// 跳转到序
+const gotoXu = () => {
+  router.push({ name: "xiao" });
+};
+// 跳转到github主页
+const gotoGithub = () => {
+  window.open("https://github.com/dzxiao");
+};
 </script>
 <template>
   <div class="home-layout">
@@ -15,8 +48,18 @@ defineComponent({
       </div>
     </div>
     <div class="btns">
-      <n-button type="primary" round> 从这里起始 </n-button>
-      <n-button round secondary>GITHUB</n-button>
+      <n-button type="primary" round @click="gotoXu"> 从这里起始 </n-button>
+      <n-button round secondary @click="gotoGithub">GITHUB</n-button>
+    </div>
+    <div class="relation-article">
+      <n-divider title-placement="left">
+        <p>精选文章</p>
+      </n-divider>
+      <Carousel :images="imgList" />
+      <n-divider title-placement="left">
+        <p>MarkDown</p>
+      </n-divider>
+      <Carousel :images="imgList" />
     </div>
   </div>
 </template>
@@ -43,7 +86,17 @@ defineComponent({
       font-size: 15px;
     }
   }
+  .relation-article {
+    width: 50%;
+    padding-top: 60px;
+    p {
+      font-size: 22px;
+      color: #111;
+      box-sizing: border-box;
+    }
+  }
 }
+
 // 头像波纹
 .box {
   width: 110px;

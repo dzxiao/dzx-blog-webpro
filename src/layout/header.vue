@@ -1,65 +1,78 @@
 <script setup lang="ts">
-import { defineComponent, h, ref } from 'vue';
-import type { CSSProperties } from 'vue';
-import { useThemeStore } from '@/stores/pinia';
-import { useRouter } from 'vue-router';
+import { defineComponent, h, ref, watch } from "vue";
+import type { CSSProperties } from "vue";
+import { useThemeStore } from "@/stores/pinia";
+import { useRouter } from "vue-router";
 // @ts-ignore
-import { GameController, Sunny, MoonOutline } from '@vicons/ionicons5';
-import type { MenuOption } from 'naive-ui';
+import { GameController, Sunny, MoonOutline } from "@vicons/ionicons5";
+import type { MenuOption } from "naive-ui";
 const router = useRouter();
 const themeStore = useThemeStore();
 defineComponent({
   components: {
-    GameController
+    GameController,
   },
 });
+// header 右侧菜单
 const menuOptions: MenuOption[] = [
   {
-    label: '序',
-    key: '/xiao',
+    label: "序",
+    key: "/xiao",
   },
   {
-    label: '续',
-    key: '/about',
-  }
+    label: "续",
+    key: "/about",
+  },
 ];
 // 路由handles
-const activeKey = ref('/xiao');
-activeKey.value = location.pathname;
-if (activeKey.value === "/") {
-  activeKey.value = '/xiao';
-}
+const activeKey = ref("/");
+
+watch(
+  () => router.currentRoute.value.path,
+  (toPath) => {
+    activeKey.value = toPath;
+  },
+  { immediate: true, deep: true }
+);
+
+// 切换menu时
 const isChangeMenu = (key: string, item: MenuOption) => {
   activeKey.value = key;
   router.push({ path: key });
-}
+};
 
 // 主题切换switch样式
-const railStyle = ({ focused, checked }: { focused: boolean, checked: boolean }) => {
-  const style: CSSProperties = {}
+const railStyle = ({
+  focused,
+  checked,
+}: {
+  focused: boolean;
+  checked: boolean;
+}) => {
+  const style: CSSProperties = {};
   if (checked) {
-    style.background = '#63e2b7'
+    style.background = "#63e2b7";
     if (focused) {
       // style.boxShadow = '0 0 0 2px #63e2b7'
     }
   } else {
-    style.background = '#e2e1e4'
+    style.background = "#e2e1e4";
     if (focused) {
-      style.boxShadow = '0 0 0 2px #ccccd6'
+      style.boxShadow = "0 0 0 2px #ccccd6";
     }
   }
-  return style
-}
+  return style;
+};
 // 切换主题时
 const switchTheme = (type: string) => {
-  let theme = '';
+  let theme = "";
   if (type) {
-    theme = 'dark';
+    theme = "dark";
   } else {
-    theme = 'light'
+    theme = "light";
   }
   themeStore.changeTheme(theme);
-}
+};
 </script>
 
 <template>
@@ -67,11 +80,20 @@ const switchTheme = (type: string) => {
     <!-- <div class="left-logo"> <n-icon size="30" :component="GameController" /><span>logo</span></div> -->
     <div class="center-title">
       <!-- <n-spin size="small" /> -->
-      Zixiao-D
+      <router-link to="/"><n-button text>Zixiao-D</n-button></router-link>
     </div>
     <div class="right-menu">
-      <n-menu v-model:value="activeKey" mode="horizontal" :on-update:value="isChangeMenu" :options="menuOptions" />
-      <n-switch :round="false" :rail-style="railStyle" :on-update:value="switchTheme">
+      <n-menu
+        v-model:value="activeKey"
+        mode="horizontal"
+        :on-update:value="isChangeMenu"
+        :options="menuOptions"
+      />
+      <n-switch
+        :round="false"
+        :rail-style="railStyle"
+        :on-update:value="switchTheme"
+      >
         <template #checked-icon>
           <n-icon :component="MoonOutline" />
         </template>
@@ -79,7 +101,6 @@ const switchTheme = (type: string) => {
           <n-icon :component="Sunny" />
         </template>
       </n-switch>
-
     </div>
   </n-layout-header>
 </template>
@@ -94,9 +115,10 @@ const switchTheme = (type: string) => {
   justify-content: space-between;
   align-items: center;
   z-index: 9;
-  box-shadow: 0 0 8px 0 rgba(232, 237, 250, .6), 0 2px 4px 0 rgba(232, 237, 250, .5);
+  box-shadow: 0 0 8px 0 rgba(232, 237, 250, 0.6),
+    0 2px 4px 0 rgba(232, 237, 250, 0.5);
 
-  >div {
+  > div {
     height: 60px;
   }
 
@@ -110,10 +132,6 @@ const switchTheme = (type: string) => {
     display: flex;
     align-items: center;
     justify-content: space-between;
-
-    .n-spin {
-      margin-right: 8px;
-    }
   }
 
   .right-menu {
