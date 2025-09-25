@@ -12,7 +12,7 @@ defineComponent({
   },
 });
 
-const imgList: IMGLISTTYPE = ref([
+const imgList = ref<IMGLISTTYPE[]>([
   {
     title: '测试1',
     link: 'https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel1.jpeg',

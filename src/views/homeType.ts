@@ -1,4 +1,4 @@
-interface IMGLISTTYPE {
+export interface IMGLISTTYPE {
   title?: string;
-  link: string;
+  link?: string;
 }

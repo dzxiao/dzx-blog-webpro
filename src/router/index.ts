@@ -17,7 +17,10 @@ const router = createRouter({
     {
       path: '/xiao',
       name: 'xiao',
-      component: () => import('@/views/xu/Xiao.vue')
+      component: () => import('@/views/xu/Xiao.vue'),
+      children: [
+        
+      ]
     },
     {
       path: '/about',

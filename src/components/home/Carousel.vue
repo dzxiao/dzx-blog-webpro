@@ -44,6 +44,7 @@
 <script setup lang="ts">
 import { ArrowBack, ArrowForward } from "@vicons/ionicons5";
 import { defineComponent, defineProps, defineEmits } from "vue";
+import type { IMGLISTTYPE } from "@/views/homeType";
 defineComponent({
   components: {
     ArrowBack,
@@ -51,7 +52,7 @@ defineComponent({
   },
 });
 
-const props = defineProps<{ images: { title: string; link: string }[] }>();
+const props = defineProps<{ images: IMGLISTTYPE[] }>();
 
 const emit = defineEmits({});
 </script>
