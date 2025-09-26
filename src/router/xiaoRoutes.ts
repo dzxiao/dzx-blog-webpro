@@ -2,6 +2,7 @@ const xiaoRoutes = [
   {
     path: 'about',
     name: '/xiao/about',
+    redirect: '/xiao/about/personal',
     component: () => import('@/views/xu/components/index.vue'),
     meta: {
       title: '关于我',

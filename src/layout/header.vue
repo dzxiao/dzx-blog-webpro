@@ -18,6 +18,12 @@ const menuOptions: MenuOption[] = [
   {
     label: "序",
     key: "/xiao",
+    children: [
+      ...router.getRoutes().filter((route) => route.path === "/xiao")[0].children?.map((route) => ({
+        label: route.meta?.title,
+        key: route.name?.toString(),
+      })),
+    ],
   },
   {
     label: "续",
@@ -30,14 +36,19 @@ const activeKey = ref("/");
 watch(
   () => router.currentRoute.value.path,
   (toPath) => {
-    activeKey.value = toPath;
+    if(toPath.lastIndexOf("/") === 0) {
+      activeKey.value = toPath;
+    } else {
+      activeKey.value = toPath.substring(0, toPath.lastIndexOf("/"));
+    }
   },
   { immediate: true, deep: true }
 );
 
 // 切换menu时
 const isChangeMenu = (key: string, item: MenuOption) => {
-  activeKey.value = key;
+  activeKey.value = key.substring(0, key.lastIndexOf("/"));
+  console.log(activeKey.value);
   router.push({ path: key });
 };
 
@@ -52,9 +63,6 @@ const railStyle = ({
   const style: CSSProperties = {};
   if (checked) {
     style.background = "#63e2b7";
-    if (focused) {
-      // style.boxShadow = '0 0 0 2px #63e2b7'
-    }
   } else {
     style.background = "#e2e1e4";
     if (focused) {
@@ -137,9 +145,12 @@ const switchTheme = (type: string) => {
   .right-menu {
     display: flex;
     align-items: center;
-
+    .n-menu .n-submenu .n-menu-item-content {
+      height: 60px !important;
+    }
     .n-menu-item {
       height: 60px;
+      
     }
     .n-switch {
       margin-left: 10px;
