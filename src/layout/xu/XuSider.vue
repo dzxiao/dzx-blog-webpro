@@ -15,9 +15,7 @@
         <n-avatar :size="60" :src="personalInfo.avatar" round />
         <div class="user-info">
           <n-text strong class="user-name">{{ personalInfo.name }}</n-text>
-          <n-text depth="3" class="user-title">{{
-            personalInfo.title
-          }}</n-text>
+          <n-text depth="3" class="user-title">{{ personalInfo.title }}</n-text>
         </div>
       </div>
 
@@ -26,6 +24,7 @@
         :collapsed="isCollapsed"
         :options="menuOptions"
         class="blog-menu-list"
+        @update:value="switchMenu"
       />
     </div>
   </n-layout-sider>
@@ -33,62 +32,66 @@
 
 <script setup lang="ts">
 import { ref, computed } from "vue";
+import { useRouter, useRoute } from "vue-router";
 import { personalInfo } from "@/views/xu/components/data";
+import xiaoRoutes from "@/router/xiaoRoutes";
 
-// 博客菜单数据
-const blogMenu = [
-  {
-    id: "about",
-    title: "关于我",
-    icon: "👨‍💻",
-    children: [
-      { id: "personal-info", title: "个人信息", href: "#personal-info" },
-    ],
-  },
-  {
-    id: "articles",
-    title: "技术文章",
-    icon: "📝",
-    children: [
-      { id: "frontend", title: "前端技术", href: "#frontend" },
-      { id: "backend", title: "后端开发", href: "#backend" },
-      { id: "devops", title: "DevOps", href: "#devops" },
-    ],
-  },
-];
+const router = useRouter();
+const route = useRoute();
 
 // 当前选中的菜单项
-const activeMenu = ref("about");
-const activeSubMenu = ref("personal-info");
+const activeSubMenu = ref("personal");
 const isCollapsed = ref(false);
 
-// 切换菜单
-const switchMenu = (menuId: string, subMenuId?: string) => {
-  activeMenu.value = menuId;
-  if (subMenuId) {
-    activeSubMenu.value = subMenuId;
-  }
-};
-
-// 菜单选项
+// 从路由动态生成菜单选项
 const menuOptions = computed(() => {
   const options: any[] = [];
 
-  blogMenu.forEach((menu) => {
-    const menuOption = {
-      label: menu.title,
-      key: menu.id,
-      icon: menu.icon,
-      children: menu.children.map((child) => ({
-        label: child.title,
-        key: child.id,
-      })),
-    };
+  // 按order排序路由
+  const sortedRoutes = xiaoRoutes
+    .filter((route: any) => route.meta?.title)
+    .sort((a: any, b: any) => (a.meta?.order || 0) - (b.meta?.order || 0));
+
+  sortedRoutes.forEach((route: any) => {
+    let menuOption: any = [];
+    if (route.children && route.children.length > 0) {
+      // 生成多级菜单
+      menuOption = {
+        label: route.meta?.title,
+        key: route.name,
+        icon: route.meta?.icon,
+        children: [...route.children],
+      };
+    } else {
+      // 生成单级菜单
+      menuOption = {
+        label: route.meta?.title,
+        key: route.name,
+        icon: route.meta?.icon,
+      };
+    }
     options.push(menuOption);
   });
-
   return options;
 });
+
+// 切换菜单
+const switchMenu = (value: string) => {
+  activeSubMenu.value = value;
+  // 导航到对应的路由
+  router.push({ name: value });
+};
+
+// 监听路由变化，更新当前选中的菜单
+const updateActiveMenu = () => {
+  const currentRoute = route.name as string;
+  if (currentRoute) {
+    activeSubMenu.value = currentRoute;
+  }
+};
+
+// 初始化时更新菜单状态
+updateActiveMenu();
 
 // 暴露给父组件的方法和属性
 defineExpose({

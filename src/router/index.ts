@@ -1,6 +1,7 @@
 import type { App } from "vue";
 import { createRouter, createWebHistory } from 'vue-router';
 import type { Router } from 'vue-router';
+import xiaoRoutes from './xiaoRoutes';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.VITE_BASE_PATH),
@@ -17,10 +18,9 @@ const router = createRouter({
     {
       path: '/xiao',
       name: 'xiao',
+      redirect: '/xiao/personal',
       component: () => import('@/views/xu/Xiao.vue'),
-      children: [
-        
-      ]
+      children: xiaoRoutes
     },
     {
       path: '/about',
