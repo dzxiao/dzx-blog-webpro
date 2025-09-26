@@ -10,7 +10,7 @@ import {
 <template>
   <n-layout-content class="main-content">
     <!-- 个人信息 -->
-    <div id="personal-info" class="content-section">
+    <div class="content-section">
       <n-card title="个人信息" class="section-card">
         <div class="personal-info-content">
           <div class="info-header">
@@ -79,7 +79,7 @@ import {
     </div>
 
     <!-- 技能专长 -->
-    <div id="skills" class="content-section">
+    <div class="content-section">
       <n-card title="技能专长" class="section-card">
         <n-grid :cols="2" :x-gap="24" :y-gap="20">
           <n-gi v-for="skill in skills" :key="skill.category">
@@ -102,7 +102,7 @@ import {
     </div>
 
     <!-- 工作经历 -->
-    <div id="experience" class="content-section">
+    <div class="content-section">
       <n-card title="工作经历" class="section-card">
         <n-timeline>
           <n-timeline-item
@@ -173,7 +173,7 @@ import {
   </div> -->
 
     <!-- 技术文章 -->
-    <div id="frontend" class="content-section">
+    <div class="content-section">
       <n-card title="技术文章" class="section-card">
         <n-list>
           <n-list-item v-for="article in articles" :key="article.title">
@@ -212,7 +212,7 @@ import {
     </div>
 
     <!-- 联系方式 -->
-    <div id="social-media" class="content-section">
+    <div class="content-section">
       <n-card title="联系方式" class="section-card">
         <n-grid :cols="2" :x-gap="24" :y-gap="20">
           <n-gi>
@@ -272,3 +272,272 @@ import {
     </div>
   </n-layout-content>
 </template>
+
+<style scoped lang="less">
+// 内容区域样式
+.content-section {
+  margin-bottom: 32px;
+
+  .section-card {
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+}
+
+// 个人信息样式
+.personal-info-content {
+  .info-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 24px;
+    margin-bottom: 24px;
+
+    .info-details {
+      flex: 1;
+
+      .info-name {
+        margin: 0 0 8px 0;
+        font-size: 2rem;
+        font-weight: 700;
+        color: #2c3e50;
+      }
+
+      .info-title {
+        display: block;
+        font-size: 1.2rem;
+        color: #8a2be2;
+        margin-bottom: 12px;
+      }
+
+      .info-bio {
+        font-size: 1rem;
+        line-height: 1.6;
+      }
+    }
+  }
+
+  .info-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 0;
+
+    .n-icon {
+      color: #8a2be2;
+    }
+  }
+}
+
+// 技能样式
+.skill-category {
+  .skill-title {
+    margin: 0 0 16px 0;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #2c3e50;
+  }
+
+  // 技能标签主题色
+  ::v-deep(.n-tag) {
+    background-color: #b36ef3;
+    color: #ffffff;
+    border-color: #b36ef3;
+
+    &:hover {
+      background-color: rgba(157, 77, 231, 1);
+      border-color: rgba(157, 77, 231, 1);
+    }
+  }
+}
+
+// 工作经历样式
+.experience-content {
+  .achievement-list {
+    margin-top: 12px;
+
+    ::v-deep(.n-list-item) {
+      padding: 4px 0;
+    }
+  }
+}
+
+// 项目卡片样式
+.project-card {
+  .project-content {
+    display: flex;
+    gap: 20px;
+
+    .project-image {
+      width: 200px;
+      height: 120px;
+      border-radius: 8px;
+      overflow: hidden;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+
+    .project-info {
+      flex: 1;
+
+      .project-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 12px;
+
+        .project-title {
+          margin: 0;
+          font-size: 1.3rem;
+          font-weight: 600;
+          color: #2c3e50;
+        }
+      }
+
+      .project-description {
+        display: block;
+        margin-bottom: 16px;
+        line-height: 1.6;
+      }
+
+      .project-tech {
+        margin-bottom: 16px;
+      }
+
+      .project-actions {
+        margin-top: 16px;
+      }
+    }
+  }
+}
+
+// 文章卡片样式
+.article-card {
+  .article-content {
+    .article-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 12px;
+
+      .article-title {
+        margin: 0;
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: #2c3e50;
+      }
+
+      .article-meta {
+        font-size: 0.9rem;
+      }
+      ::v-deep(.n-tag) {
+        background-color: #b36ef3;
+        color: #ffffff;
+        border-color: #b36ef3;
+
+        &:hover {
+          background-color: rgba(157, 77, 231, 1);
+          border-color: rgba(157, 77, 231, 1);
+        }
+      }
+    }
+
+    .article-summary {
+      display: block;
+      margin-bottom: 16px;
+      line-height: 1.6;
+      color: #666;
+    }
+
+    .article-tags {
+      margin-top: 12px;
+    }
+  }
+}
+
+// 联系方式样式
+.social-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  .social-icon {
+    font-size: 20px;
+  }
+
+  .social-info {
+    flex: 1;
+
+    .n-text {
+      display: block;
+
+      &:first-child {
+        margin-bottom: 2px;
+      }
+    }
+  }
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  .n-icon {
+    color: #8a2be2;
+  }
+}
+@media (max-width: 768px) {
+  .content-area .main-content {
+    padding: 16px;
+  }
+
+  .personal-info-content .info-header .info-details .info-name {
+    font-size: 1.5rem;
+  }
+
+  .article-card .article-content .article-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+}
+
+// 深色主题适配
+:global(.dark) {
+  .content-area .main-content {
+    background: #1a1a1a;
+  }
+
+  .personal-info-content .info-header .info-details .info-name {
+    color: #e2e8f0;
+  }
+
+  .personal-info-content .info-header .info-details .info-title {
+    color: #667eea;
+  }
+
+  .personal-info-content .info-item .n-icon {
+    color: #8a2be2;
+  }
+
+  .skill-category .skill-title {
+    color: #e2e8f0;
+  }
+
+  .project-card .project-content .project-info .project-header .project-title {
+    color: #e2e8f0;
+  }
+
+  .article-card .article-content .article-header .article-title {
+    color: #e2e8f0;
+  }
+
+  .contact-item .n-icon {
+    color: #8a2be2;
+  }
+}
+</style>

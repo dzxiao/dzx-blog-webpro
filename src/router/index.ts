@@ -18,7 +18,7 @@ const router = createRouter({
     {
       path: '/xiao',
       name: 'xiao',
-      redirect: '/xiao/personal',
+      // redirect: '/xiao/personal',
       component: () => import('@/views/xu/Xiao.vue'),
       children: xiaoRoutes
     },

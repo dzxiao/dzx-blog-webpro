@@ -60,7 +60,13 @@ const menuOptions = computed(() => {
         label: route.meta?.title,
         key: route.name,
         icon: route.meta?.icon,
-        children: [...route.children],
+        children: [
+          ...route.children.map((child: any) => ({
+            label: child.meta?.title,
+            key: child.name,
+            icon: child.meta?.icon,
+          })),
+        ],
       };
     } else {
       // 生成单级菜单
@@ -79,7 +85,7 @@ const menuOptions = computed(() => {
 const switchMenu = (value: string) => {
   activeSubMenu.value = value;
   // 导航到对应的路由
-  router.push({ name: value });
+  router.push({ path: value });
 };
 
 // 监听路由变化，更新当前选中的菜单
