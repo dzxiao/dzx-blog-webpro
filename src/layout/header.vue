@@ -47,8 +47,8 @@ watch(
 
 // 切换menu时
 const isChangeMenu = (key: string, item: MenuOption) => {
-  activeKey.value = key.substring(0, key.lastIndexOf("/"));
-  console.log(activeKey.value);
+  // activeKey.value = key.substring(0, key.lastIndexOf("/"));
+  activeKey.value = key;
   router.push({ path: key });
 };
 
