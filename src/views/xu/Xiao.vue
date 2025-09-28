@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, defineComponent, nextTick, watch } from "vue";
+import { ref, defineComponent, nextTick, watch, onMounted } from "vue";
 import XuSider from "@/layout/xu/XuSider.vue";
 import { useRoute } from "vue-router";
 
@@ -56,6 +56,15 @@ watch(
     });
   }
 );
+onMounted(() => {
+  anchorLinks.value = [];
+  nextTick(() => {
+    // 延迟执行，确保子组件已渲染
+    setTimeout(() => {
+      generateAnchorLinks();
+    }, 100);
+  });
+});
 </script>
 
 <template>

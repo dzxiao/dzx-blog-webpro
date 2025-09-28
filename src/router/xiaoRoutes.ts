@@ -24,6 +24,7 @@ const xiaoRoutes = [
   {
     path: "article",
     name: "/xiao/article",
+    redirect: "/xiao/article/list",
     component: () => import("@/views/xu/components/index.vue"),
     meta: {
       title: "文章",
@@ -32,12 +33,20 @@ const xiaoRoutes = [
     },
     children: [
       {
-        path: "frontend",
-        name: "/xiao/article/frontend",
-        component: () => import("@/views/xu/components/Frontend.vue"),
+        path: "list",
+        name: "/xiao/article/list",
+        component: () => import("@/views/xu/components/ArticleList.vue"),
         meta: {
-          title: "前端技术",
+          title: "文章列表",
           order: 1,
+        },
+      },
+      {
+        path: ":id",
+        name: "/xiao/article/detail",
+        component: () => import("@/views/xu/components/ArticleDetail.vue"),
+        meta: {
+          hidden: true,
         },
       },
     ],

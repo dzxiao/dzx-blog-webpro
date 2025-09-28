@@ -61,7 +61,7 @@ const menuOptions = computed(() => {
         key: route.name,
         icon: route.meta?.icon,
         children: [
-          ...route.children.map((child: any) => ({
+          ...route.children.filter((child: any) => !child.meta?.hidden).map((child: any) => ({
             label: child.meta?.title,
             key: child.name,
             icon: child.meta?.icon,

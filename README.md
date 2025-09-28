@@ -62,8 +62,10 @@ npm run test:unit
 - 🌙 支持明暗主题切换
 - 📱 响应式设计，适配各种设备
 - 🎯 个人简历展示
-- 📝 技术文章管理
+- 📝 技术文章管理（支持Markdown渲染）
 - 🎪 轮播图展示
+- 🔍 代码高亮显示
+- 📖 文章列表和详情页面
 
 ## 技术栈
 - Vue 3 + TypeScript
@@ -71,8 +73,69 @@ npm run test:unit
 - Vite 构建工具
 - Pinia 状态管理
 - Vue Router 路由管理
+- Markdown-it (Markdown渲染)
+- Highlight.js (代码高亮)
+
+## Markdown文章功能
+
+### 功能说明
+本项目支持渲染本地Markdown文件，提供完整的文章管理功能：
+
+- **文章列表页面** (`/xiao/article/list`): 显示所有markdown文件的列表
+- **文章详情页面** (`/xiao/article/:id`): 渲染单个markdown文件内容
+- **自动解析**: 自动提取文章标题、摘要、标签等信息
+- **代码高亮**: 支持多种编程语言的语法高亮
+- **响应式设计**: 适配各种设备尺寸
+
+### 使用方法
+
+1. **添加文章**: 将markdown文件放入 `src/assets/mds/` 目录
+2. **文件命名**: 建议使用有意义的文件名，如 `vue3-composition-api.md`
+3. **文章格式**: 支持标准markdown语法，包括：
+   - 标题 (# ## ###)
+   - 代码块 (```language)
+   - 列表、表格、链接等
+   - 图片、引用等
+
+### 技术实现
+
+- **Markdown渲染**: 使用 `markdown-it` 库将markdown转换为HTML
+- **代码高亮**: 使用 `highlight.js` 提供语法高亮
+- **文件读取**: 通过Vite的 `import.meta.glob` 动态导入markdown文件
+- **路由管理**: 支持文章列表和详情页面的路由跳转
+
+### 文件结构
+```
+src/
+├── services/
+│   └── markdownService.ts    # Markdown渲染服务
+├── views/xu/components/
+│   ├── ArticleList.vue       # 文章列表组件
+│   ├── ArticleDetail.vue     # 文章详情组件
+│   └── Frontend.vue          # 前端技术文章组件
+└── assets/mds/               # Markdown文件目录
+    ├── vue3-composition-api.md
+    ├── docker-deployment.md
+    └── ...
+```
+
+### 快速开始
+1. 将markdown文件放入 `src/assets/mds/` 目录
+2. 访问 `/xiao/article/list` 查看所有文章
+3. 访问 `/xiao/article/frontend` 查看前端技术文章
+4. 点击文章标题查看详情页面
+
+> 📖 详细使用指南请参考 [MARKDOWN_GUIDE.md](./MARKDOWN_GUIDE.md)
 
 ## 开发记录
+
+### 2024年Markdown文章系统
+- 集成了markdown-it和highlight.js，实现完整的markdown渲染功能
+- 创建了文章列表和详情页面，支持动态路由
+- 实现了自动文章解析，提取标题、摘要、标签等信息
+- 添加了代码高亮、响应式设计等用户体验优化
+- 支持多种markdown语法，包括代码块、表格、链接等
+
 ### 2024年主题色系优化
 - 统一了main-content区域的色系，使用项目主题紫色系
 - 更新了个人信息、技能、项目、文章等模块的标题颜色
