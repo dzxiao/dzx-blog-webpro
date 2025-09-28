@@ -274,15 +274,7 @@ import {
 </template>
 
 <style scoped lang="less">
-// 内容区域样式
-.content-section {
-  margin-bottom: 32px;
-
-  .section-card {
-    border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  }
-}
+@import "./index.scss";
 
 // 个人信息样式
 .personal-info-content {

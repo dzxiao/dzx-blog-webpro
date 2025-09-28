@@ -1,15 +1,14 @@
 <script setup lang="ts">
-import { ref, defineComponent, onMounted, nextTick } from "vue";
+import { ref, defineComponent, nextTick, watch } from "vue";
 import XuSider from "@/layout/xu/XuSider.vue";
-import markdownTxt from "@/assets/mds/渲染md文档之v-md-editor.md?raw";
+import { useRoute } from "vue-router";
 
 defineComponent({
   components: {
     XuSider,
   },
 });
-
-const md = ref(markdownTxt);
+const route = useRoute();
 
 // 动态锚点链接
 const anchorLinks = ref<Array<{ title: string; href: string }>>([]);
@@ -17,26 +16,26 @@ const anchorLinks = ref<Array<{ title: string; href: string }>>([]);
 // 生成锚点链接
 const generateAnchorLinks = () => {
   const links: Array<{ title: string; href: string }> = [];
-  
+
   // 查找所有 n-card-header__main 元素
-  const cardHeaders = document.querySelectorAll('.n-card-header__main');
-  
+  const cardHeaders = document.querySelectorAll(".n-card-header__main");
+
   cardHeaders.forEach((header, index) => {
     const title = header.textContent?.trim();
     if (title) {
       const id = generateIdFromTitle(title, index);
       // 为父元素添加ID
-      const card = header.closest('.n-card');
+      const card = header.closest(".n-card");
       if (card) {
         card.id = id;
       }
       links.push({
         title: title,
-        href: `#${id}`
+        href: `#${id}`,
       });
     }
   });
-  
+
   anchorLinks.value = links;
 };
 
@@ -45,15 +44,18 @@ const generateIdFromTitle = (title: string, index: number): string => {
   return `section-${index + 1}`;
 };
 
-// 组件挂载后生成锚点链接
-onMounted(() => {
-  nextTick(() => {
-    // 延迟执行，确保子组件已渲染
-    setTimeout(() => {
-      generateAnchorLinks();
-    }, 100);
-  });
-});
+watch(
+  () => route.path,
+  () => {
+    anchorLinks.value = [];
+    nextTick(() => {
+      // 延迟执行，确保子组件已渲染
+      setTimeout(() => {
+        generateAnchorLinks();
+      }, 100);
+    });
+  }
+);
 </script>
 
 <template>
@@ -63,7 +65,7 @@ onMounted(() => {
 
     <!-- 右侧内容区域 -->
     <n-layout class="content-area">
-      <div style="width: calc(100% - 200px);">
+      <div style="width: calc(100% - 200px)">
         <router-view />
       </div>
 
